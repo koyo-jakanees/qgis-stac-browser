@@ -13,6 +13,9 @@ class API:
         self._collections = [
             Collection(self, c) for c in self._json.get('collections', [])
         ]
+        self._links = [
+            Link(self, c) for c in self._json.get('links', [])
+        ]
 
     def load(self):
         self._data = network.request(f'{self.href}/stac')
@@ -85,8 +88,15 @@ class API:
         return {
             'id': self.id,
             'href': self.href,
+            'title': self.title,
+            'stac_version': self.version,
+            'description': self.description,
+            'type': self.type,
+            'stac_extensions': self.stac_extensions,
+            'links': self.links,
             'data': self.data,
             'collections': [c.json for c in self.collections],
+            'conformsTo': self.conformsTo
         }
 
     @property
@@ -95,7 +105,7 @@ class API:
 
     @property
     def title(self):
-        return self.data.get('title', self.href)
+        return self._json.get('title', None)
 
     @property
     def href(self):
@@ -103,11 +113,23 @@ class API:
 
     @property
     def version(self):
-        return self.data.get('stac_version', None)
+        return self._json.get('stac_version', None)
 
     @property
     def description(self):
-        return self.data.get('description', None)
+        return self._json.get('description', None)
+
+    @property
+    def type(self):
+        return self._json.get('type', None)
+
+    @property
+    def stac_extensions(self):
+        return self._json.get('stac_extensions', [])
+
+    @property
+    def conformsTo(self):
+        return self._json.get('conformsTo', [])
 
     @property
     def data(self):
@@ -117,7 +139,7 @@ class API:
 
     @property
     def links(self):
-        return [Link(l) for l in self.data.get('links', [])]
+        return [Link(l) for l in self._json.get('links', [])]
 
     @property
     def collection_ids(self):

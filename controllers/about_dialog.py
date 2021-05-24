@@ -1,4 +1,4 @@
-from PyQt5 import uic, QtWidgets
+from qgis.PyQt import uic, QtWidgets
 
 from ..utils import ui
 

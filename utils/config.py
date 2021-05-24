@@ -44,12 +44,24 @@ class Config:
                     "href": "https://stac.boundlessgeo.io",
                 },
                 {
-                    "id": "default-sat-api",
-                    "href": "https://sat-api.developmentseed.org",
-                },
-                {
                     "id": "default-astraea",
                     "href": "https://stac.astraea.earth/api/v2",
+                },
+                {
+                    "id": "Franklin STAC API",
+                    "href": "https://franklin.nasa-hsi.azavea.com/",
+                },
+                {
+                    "id": "ch",
+                    "href": "https://data.geo.admin.ch/api/stac/v0.9/",
+                },
+                {
+                    "id": "microsoft-pc",
+                    "href": "https://planetarycomputer.microsoft.com/api/stac/v1/",
+                },
+                {
+                    "id": "default-sat-api",
+                    "href": "https://sat-api.developmentseed.org",
                 }
             ]
 

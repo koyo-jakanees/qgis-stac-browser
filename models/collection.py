@@ -13,6 +13,10 @@ class Collection:
     @property
     def stac_version(self):
         return self._json.get('stac_version', None)
+    
+    @property
+    def stac_extensions(self):
+        return self._json.get('stac_version', [])
 
     @property
     def id(self):

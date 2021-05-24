@@ -1,7 +1,7 @@
 import uuid
 import urllib
 
-from PyQt5 import uic, QtWidgets
+from qgis.PyQt import uic, QtWidgets
 
 from ..utils import ui
 from ..utils.logging import error

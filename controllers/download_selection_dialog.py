@@ -1,6 +1,6 @@
-from PyQt5 import uic
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
+from qgis.PyQt import uic
+from qgis.PyQt import QtWidgets
+from qgis.PyQt import QtCore
 
 from ..utils import ui
 

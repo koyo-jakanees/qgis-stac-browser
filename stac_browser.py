@@ -2,8 +2,8 @@ import time
 import os.path
 import sys
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction
 
 from .resources import *
 from .controllers.collection_loading_dialog import CollectionLoadingDialog

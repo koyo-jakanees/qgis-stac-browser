@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from PyQt5 import uic, QtWidgets, QtCore
-from PyQt5.QtGui import QStandardItemModel
-from PyQt5.QtWidgets import (QTreeWidgetItem, QFormLayout)
+from qgis.PyQt import uic, QtWidgets, QtCore
+from qgis.PyQt.QtGui import QStandardItemModel
+from qgis.PyQt.QtWidgets import (QTreeWidgetItem, QFormLayout)
 
 from qgis.core import QgsMapLayerProxyModel
 
