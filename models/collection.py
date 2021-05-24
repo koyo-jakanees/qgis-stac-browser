@@ -11,6 +11,10 @@ class Collection:
         return self._json
 
     @property
+    def type(self):
+        return self._json.get('type', None)
+
+    @property
     def stac_version(self):
         return self._json.get('stac_version', None)
     

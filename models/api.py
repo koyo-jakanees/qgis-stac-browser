@@ -13,12 +13,12 @@ class API:
         self._collections = [
             Collection(self, c) for c in self._json.get('collections', [])
         ]
-        self._links = [
-            Link(self, c) for c in self._json.get('links', [])
-        ]
+        # self._links = [
+        #     Link(self, c) for c in self._json.get('links', [])
+        # ]
 
     def load(self):
-        self._data = network.request(f'{self.href}/stac')
+        self._data = network.request(f'{self.href}')
         self._collections = [
             self.load_collection(c) for c in self.collection_ids
         ]
@@ -61,7 +61,7 @@ class API:
 
         search_result = SearchResult(self,
                                      network.request(
-                                         f'{self.href}/stac/search',
+                                         f'{self.href}/search',
                                          data=body))
 
         items = search_result.items
