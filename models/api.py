@@ -23,10 +23,10 @@ class API:
             self.load_collection(c) for c in self.collection_ids
         ]
 
-    def load_collection(self, collection_id):
+    def load_collection(self):
         return Collection(self,
                           network.request(
-                              f'{self.href}/collections/{collection_id}'))
+                              f'{self.href}/collections'))
 
     def search_items(self, collections=[], bbox=[], start_time=None,
                      end_time=None, query=None, page=1, next_page=None, limit=50,
@@ -88,15 +88,15 @@ class API:
         return {
             'id': self.id,
             'href': self.href,
-            'title': self.title,
-            'stac_version': self.version,
-            'description': self.description,
-            'type': self.type,
-            'stac_extensions': self.stac_extensions,
-            'links': self.links,
+            # 'title': self.title,
+            # 'stac_version': self.version,
+            # 'description': self.description,
+            # 'type': self.type,
+            # 'stac_extensions': self.stac_extensions,
+            # 'links': self.links,
             'data': self.data,
             'collections': [c.json for c in self.collections],
-            'conformsTo': self.conformsTo
+            # 'conformsTo': self.conformsTo
         }
 
     @property

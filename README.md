@@ -60,7 +60,7 @@ Edit:
 
 Using `pb_tool` to deploy everytime you make changes can be repetitive and time consuming hence if you cloned the repo simply symlink the directory to your local QGIS profile plugins directory.
 
-Linux for example.
+Linux for example, should work on mac also.
 
 ```sh
 ln -s `pwd` $HOME/.local/share/QGIS/QGIS3/profiles/default/python/plugins/${PWD##*/}
