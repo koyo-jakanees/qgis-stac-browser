@@ -68,7 +68,8 @@ class Collection:
         return self._pi
 
     def __lt__(self, other):
-        return self.title.lower() < other.title.lower()
+        if self.title is not None and other.title is not None:
+            return self.title.lower() < other.title.lower()
 
 
 class Extent:

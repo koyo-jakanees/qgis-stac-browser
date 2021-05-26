@@ -14,8 +14,11 @@ class API:
             Collection(self, c) for c in self._json.get('collections', [])
         ]
 
-    def load(self):
-        self._data = network.request(f'{self.href}/stac')
+    def load(self, href= None):
+        if href is None:
+            self._data = network.request(f'{self.href}')
+        else:
+            self._data = network.request(f'{href}')
         self._collections = [
             self.load_collection(c) for c in self.collection_ids
         ]
@@ -58,7 +61,7 @@ class API:
 
         search_result = SearchResult(self,
                                      network.request(
-                                         f'{self.href}/stac/search',
+                                         f'{self.href}/search',
                                          data=body))
 
         items = search_result.items
@@ -122,17 +125,39 @@ class API:
     @property
     def collection_ids(self):
         collection_ids = []
-        p = re.compile(r'\/collections\/(.*)')
+        p1 = {'value':""}
+        def inner():
+            p = re.compile(r'\/collections\/(.*)')
+            for link in self.links:
+                if "collections" in link.href:
+                    print(p1["value"],link.href,"reffa")
+                    if p1["value"]==link.href:
+                        continue
+                    print(link.href)
+                    l=urlparse(link.href).path
+                    k=urlparse(link.href).netloc
+                    n=urlparse(link.href).scheme
+                    if l is not None and l!="":
+                        if l[-1]!="/":
+                            l+="/"
+                        m = p.match(l)
+                        if m is None:
+                            continue
 
-        for link in self.links:
-            m = p.match(urlparse(link.href).path)
-            if m is None:
-                continue
-
-            if m.groups() is None:
-                continue
-
-            collection_ids.append(m.groups()[0])
+                        if m.groups() is None:
+                            continue
+                        if m.groups()[0]!="":
+                            collection_ids.append(m.groups()[0])
+                        print(collection_ids, "iddsss")
+                        if m.groups()[0] == "":
+                            p1["value"] = link.href
+                            href = str(n)+"://"+str(k)+str(l)
+                            print("inner", href, p1)
+                            # if p1 == href:
+                            #     continue
+                            self.load(href=href)
+                            inner()
+        inner()
 
         return collection_ids
 
