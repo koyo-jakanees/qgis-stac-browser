@@ -89,6 +89,8 @@ class API:
             'id': self.id,
             'href': self.href,
             'data': self.data,
+            'title': self.title,
+            'description': self.description,
             'collections': [c.json for c in self.collections],
         }
 

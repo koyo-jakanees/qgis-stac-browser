@@ -39,10 +39,10 @@ class Config:
 
         if apis is None:
             apis = [
-                # {
-                #     "id": "default-staccato",
-                #     "href": "https://stac.boundlessgeo.io",
-                # },
+                {
+                    "id": "default-staccato",
+                    "href": "https://stac.boundlessgeo.io",
+                },
                 {
                     "id": "default-sat-api",
                     "href": "https://sat-api.developmentseed.org/stac",
