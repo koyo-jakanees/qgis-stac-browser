@@ -1,0 +1,116 @@
+GET https://planetarycomputer.microsoft.com/api/stac/v1/
+
+###
+GET https://planetarycomputer.microsoft.com/api/stac/v1/collections
+
+###
+GET https://stac.boundlessgeo.io
+
+###
+GET https://stac.boundlessgeo.io/collections
+
+###
+GET https://sat-api.developmentseed.org/stac
+
+
+###
+GET https://franklin.nasa-hsi.azavea.com/
+
+
+###
+GET https://franklin.nasa-hsi.azavea.com/search
+
+
+###
+GET https://franklin.nasa-hsi.azavea.com/collections/
+
+###
+GET https://stac.amskepler.com/v100
+
+###
+GET https://stac.amskepler.com/v100/search
+
+###
+GET https://tamn.snapplanet.io/
+
+###
+GET https://tamn.snapplanet.io/collections
+
+###
+GET https://eod-catalog-svc-prod.astraea.earth/
+
+###
+GET https://storage.googleapis.com/cfo-public/catalog.json
+
+
+###
+GET https://data.geo.admin.ch/api/stac/v0.9/
+
+###
+GET https://data.geo.admin.ch/api/stac/v0.9/collections
+
+###
+GET https://stac.amskepler.com/v100
+
+###
+GET https://storage.googleapis.com/cfo-public/vegetation/collection.json
+
+###
+GET https://storage.googleapis.com/open-cogs/planet-stac/collection.json
+
+###
+GET https://earth-search.aws.element84.com/v0
+
+
+###
+GET https://openeo.eodc.eu/v1.0/
+
+###
+GET https://api.weather.gc.ca/stac?f=json
+
+###
+GET https://api.weather.gc.ca/stac?f=json
+
+###
+GET https://api.weather.gc.ca/stac?f=json
+
+###
+GET https://api.weather.gc.ca/stac?f=json
+
+###
+GET https://portal.opentopography.org/stac/catalog.json
+
+###
+GET https://cmr.earthdata.nasa.gov/cmr-stac
+
+###
+GET https://stac.astraea.earth/api
+
+###
+GET https://eod-catalog-svc-prod.astraea.earth/collections
+
+# ###
+# # @name newHero
+# POST http://localhost:8000/api/heroes
+# Content-Type: application/json
+
+# {
+#     "name": "Homelander",
+#     "canFly": true
+# }
+
+# ###
+# POST http://localhost:8000/api/heroes
+# Content-Type: application/json
+
+# {
+#     "nae": "Homelander",
+#     "canFly": true
+# }
+
+# ###
+# @addedHeroId={{newHero.response.body.$.id}}
+# GET http://localhost:8000/api/heroes/{{addedHeroId}}
+
+# ###
+# GET http://localhost:8000/api/heroes

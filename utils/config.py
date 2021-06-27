@@ -45,7 +45,7 @@ class Config:
                 },
                 {
                     "id": "default-sat-api",
-                    "href": "https://sat-api.developmentseed.org",
+                    "href": "https://sat-api.developmentseed.org/stac",
                 },
                 {
                     "id": "default-astraea",

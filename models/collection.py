@@ -15,12 +15,20 @@ class Collection:
         return self._json.get('stac_version', None)
 
     @property
+    def stac_extensions(self):
+        return self._json.get('stac_extensions', None)
+
+    @property
     def id(self):
         return self._json.get('id', None)
 
     @property
     def title(self):
         return self._json.get('title', None)
+
+    @property
+    def type(self):
+        return self._json.get('type', None)
 
     @property
     def description(self):
