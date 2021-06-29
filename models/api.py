@@ -1,6 +1,5 @@
 import re
-from collections import defaultdict
-from functools import reduce
+from collections import ChainMap
 from urllib.parse import urlparse
 from .collection import Collection
 from .link import Link
@@ -134,7 +133,6 @@ class API:
     def collection_ids(self):
         collection_ids = []
         p = re.compile(r'\/collections\/(.*)')
-        print(f'value of P: {p}')
 
         for link in self.links:
 
@@ -154,30 +152,39 @@ class API:
         if len(collection_ids) == 0:
             # self.href = f'{self.href}/collections/'
             # self.load()
+            # collections containing links
             col = temp_data.get('collections', [])
             self._collections = [
                 Collection(self, c) for c in temp_data.get('collections', [])]
-            new_dict = {}
-            # {reduce(new_dict.update(), col)}
-            for elem in col:
-                new_dict.update(elem)
+            new_dict = dict(ChainMap(*col))
+            # for elem in col:
+            #     new_dict.update(elem)
             print(f'NEW ELEM: \n {new_dict}')
-            links = [Link(l) for l in new_dict.get('links', [])]
-            links2 = [Link(l) for l in temp_data.get('links', [])]
+            links2 = [Link(l) for l in new_dict.get('links', [])]
+            links = [Link(l) for l in temp_data.get('links', [])]
             print(f'links: {links}')
             print(f'links: {type(links)}')
             for link in links:
-                for link in links2:
+                m = p.match(urlparse(link.href).path)
 
-                    m = p.match(urlparse(link.href).path)
-        
-                    if m is None:
-                        continue
-        
-                    if m.groups() is None:
-                        continue
-                    collection_ids.append(m.groups()[0])
-            print(f'After: {collection_ids}')
+                if m is None:
+                    continue
+
+                if m.groups() is None:
+                    continue
+                collection_ids.append(m.groups()[0])
+            print(f'After0: {collection_ids}')
+            for link in links2:
+
+                m = p.match(urlparse(link.href).path)
+
+                if m is None:
+                    continue
+
+                if m.groups() is None:
+                    continue
+                collection_ids.append(m.groups()[0])
+            print(f'After1: {collection_ids}')
             # print(temp_data)  
         return collection_ids
 
