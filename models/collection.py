@@ -31,6 +31,10 @@ class Collection:
     #     return self._json.get('type', None)
 
     @property
+    def type(self):
+        return self._json.get('type', None)
+
+    @property
     def description(self):
         return self._json.get('description', None)
 
