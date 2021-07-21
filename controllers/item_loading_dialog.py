@@ -20,19 +20,21 @@ class ItemLoadingDialog(QtWidgets.QDialog, FORM_CLASS):
         self.setupUi(self)
         self.setFixedSize(self.size())
 
-        self.loading_thread = LoadItemsThread(self.data['api_collections'],
-                                              self.data['extent'],
-                                              self.data['start_time'],
-                                              self.data['end_time'],
-                                              self.data['query'],
-                                              on_progress=self.on_progress,
-                                              on_error=self.on_error,
-                                              on_finished=self.on_finished)
+        self.loading_thread = LoadItemsThread(
+                                self.data['api_collections'],
+                                self.data['extent'],
+                                self.data['start_time'],
+                                self.data['end_time'],
+                                self.data['query'],
+                                on_progress=self.on_progress,
+                                on_error=self.on_error,
+                                on_finished=self.on_finished)
 
         self.loading_thread.start()
 
     def on_progress(self, api, collections, current_page):
-        collection_label = ', '.join([c.title for c in collections])
+        collection_label = ', '.join([
+            c.title if c.title is not None else c.id for c in collections])
         self.loadingLabel.setText('\n'.join((
             f'Searching {api.title}',
             f'Collections: [{collection_label}]',

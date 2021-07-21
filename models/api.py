@@ -58,9 +58,9 @@ class API:
             body['page'] = page
 
         search_result = SearchResult(self,
-                                     network.request(
-                                         f'{self.href}/search',
-                                         data=body))
+                                    network.request(
+                                        f'{self.href}/search',
+                                        data=body))
 
         items = search_result.items
         if len(items) >= limit:
@@ -86,7 +86,6 @@ class API:
         return {
             'id': self.id,
             'href': self.href,
-            'type': self.type,
             'data': self.data,
             'collections': [c.json for c in self.collections],
         }
@@ -95,15 +94,9 @@ class API:
     def id(self):
         return self._json.get('id', None)
     
-<<<<<<< HEAD
     # @property
     # def type(self):
     #     return self._json.get('type', None)
-=======
-    @property
-    def type(self):
-        return self._json.get('type', None)
->>>>>>> 00bd2049fc2714399dafc7b30f4e0c0587e09d0c
 
     @property
     def title(self):
@@ -200,4 +193,5 @@ class API:
         return self._collections
 
     def __lt__(self, other):
-        return self.title.lower() < other.title.lower()
+        if self.title is not None and other.title is not None:
+            return self.title.lower() < other.title.lower()

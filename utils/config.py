@@ -49,7 +49,7 @@ class Config:
                 },
                 {
                     "id": "default-astraea",
-                    "href": "https://stac.astraea.earth/api/v2",
+                    "href": "https://eod-catalog-svc-prod.astraea.earth",
                 }
             ]
 
