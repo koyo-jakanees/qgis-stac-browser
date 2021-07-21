@@ -32,11 +32,11 @@ class Item:
 
     @property
     def geometry(self):
-        return self._json.get('geometry', None)
+        return self._json.get('geometry', {})
 
     @property
     def bbox(self):
-        return self._json.get('bbox', None)
+        return self._json.get('bbox', [])
 
     @property
     def properties(self):

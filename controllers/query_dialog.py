@@ -60,7 +60,10 @@ class QueryDialog(QtWidgets.QDialog, FORM_CLASS):
             )
             api_node.setCheckState(0, QtCore.Qt.Unchecked)
             for collection in sorted(api.collections):
-                title = collection.title.replace("\n", " ")
+                if collection.title is not None:
+                    title = collection.title.replace("\n", " ")
+                else:
+                    title="no_title"
                 collection_node = QTreeWidgetItem(api_node)
                 collection_node.setText(0, title)
                 collection_node.setFlags(

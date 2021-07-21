@@ -1,4 +1,5 @@
 import re
+from collections import ChainMap
 from urllib.parse import urlparse
 from .collection import Collection
 from .link import Link
@@ -13,9 +14,9 @@ class API:
         self._collections = [
             Collection(self, c) for c in self._json.get('collections', [])
         ]
-
+    
     def load(self):
-        self._data = network.request(f'{self.href}/stac')
+        self._data = network.request(f'{self.href}')
         self._collections = [
             self.load_collection(c) for c in self.collection_ids
         ]
@@ -58,7 +59,7 @@ class API:
 
         search_result = SearchResult(self,
                                      network.request(
-                                         f'{self.href}/stac/search',
+                                         f'{self.href}/search',
                                          data=body))
 
         items = search_result.items
@@ -92,6 +93,10 @@ class API:
     @property
     def id(self):
         return self._json.get('id', None)
+    
+    # @property
+    # def type(self):
+    #     return self._json.get('type', None)
 
     @property
     def title(self):
@@ -110,6 +115,10 @@ class API:
         return self.data.get('description', None)
 
     @property
+    def capabilities(self):
+        return self.data.get('capabilities', None)
+
+    @property
     def data(self):
         if self._data is None:
             return {}
@@ -125,15 +134,58 @@ class API:
         p = re.compile(r'\/collections\/(.*)')
 
         for link in self.links:
+
             m = p.match(urlparse(link.href).path)
+
             if m is None:
                 continue
 
             if m.groups() is None:
                 continue
-
             collection_ids.append(m.groups()[0])
+        print(f'Before: {collection_ids}')
+        # naive approach first
+        
+        if len(collection_ids) == 0:
+            # self.href = f'{self.href}/collections/'
+            # self.load()
+            temp_data = network.request(f'{self.href}/collections')
+            print(f'temp type: {type(temp_data)}')
+            print(temp_data)
+            # collections containing links
+            col = temp_data.get('collections', [])
+            self._collections.append(
+                Collection(self, c) for c in temp_data.get('collections', []))
+            new_dict = dict(ChainMap(*col))
+            # for elem in col:
+            #     new_dict.update(elem)
+            print(f'NEW ELEM: \n {new_dict}')
+            links2 = [Link(l) for l in new_dict.get('links', [])]
+            links = [Link(l) for l in temp_data.get('links', [])]
+            print(f'links: {links}')
+            print(f'links: {type(links)}')
+            for link in links:
+                m = p.match(urlparse(link.href).path)
 
+                if m is None:
+                    continue
+
+                if m.groups() is None:
+                    continue
+                collection_ids.append(m.groups()[0])
+            print(f'After0: {collection_ids}')
+            for link in links2:
+
+                m = p.match(urlparse(link.href).path)
+
+                if m is None:
+                    continue
+
+                if m.groups() is None:
+                    continue
+                collection_ids.append(m.groups()[0])
+            print(f'After1: {collection_ids}')
+            # print(temp_data)  
         return collection_ids
 
     @property
