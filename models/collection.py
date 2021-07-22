@@ -26,10 +26,6 @@ class Collection:
     def title(self):
         return self._json.get('title', None)
 
-    # @property
-    # def type(self):
-    #     return self._json.get('type', None)
-
     @property
     def type(self):
         return self._json.get('type', None)

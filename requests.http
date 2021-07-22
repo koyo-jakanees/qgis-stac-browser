@@ -89,7 +89,8 @@ GET https://stac.astraea.earth/api
 ###
 GET https://eod-catalog-svc-prod.astraea.earth/collections
 
-# ###
+###
+GET https://api.radiant.earth/mlhub/v1/
 # # @name newHero
 # POST http://localhost:8000/api/heroes
 # Content-Type: application/json

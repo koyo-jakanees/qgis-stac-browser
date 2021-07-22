@@ -63,7 +63,7 @@ class QueryDialog(QtWidgets.QDialog, FORM_CLASS):
                 if collection.title is not None:
                     title = collection.title.replace("\n", " ")
                 else:
-                    title="no_title"
+                    title="no title"
                 collection_node = QTreeWidgetItem(api_node)
                 collection_node.setText(0, title)
                 collection_node.setFlags(
